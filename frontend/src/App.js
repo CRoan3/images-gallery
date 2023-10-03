@@ -1,6 +1,7 @@
-const App = () => {
+
+function App() {
   return (
-    <div>
+    <div className="App">
       <h1>Images Gallery</h1>
     </div>
   );
