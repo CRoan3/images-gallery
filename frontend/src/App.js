@@ -4,7 +4,7 @@ import Header from 'C:/Users/Chris/Desktop/images-gallery/frontend/src/component
 function App() {
   return (
     <div className="App">
-      <Header />
+      <Header title ='Images Gallery'/>
     </div>
   );
 }
