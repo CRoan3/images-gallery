@@ -21,13 +21,11 @@ const App = () => {
       .catch((err) => {     //catch will be called in case promise is rejected (if there is an error during fetch request)
         console.log(err);
       })
+    setWord('');
   }
   // (e.target[0].value) shows value of input of target (inspect > console > click the event > target) 
-
   //console.log(word); gives us an updated state every time a key is pressed, not when it is searched - controlled state
-
   // console.log(process.env.REACT_APP_UNSPLASH_KEY); // this will show us process.env object in console of website. It will show us specifially our unplash key
-
   return (
     <div className="App">
       <Header title ='Images Gallery'/>
