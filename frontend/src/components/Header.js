@@ -1,27 +1,19 @@
 import React from 'react';
 import { Navbar, Container } from 'react-bootstrap';
+import { ReactComponent as Logo } from '../Images/Images Gallery.svg'; //'C:/Users/Chris/Desktop/images-gallery/frontend/src/Images/Images Gallery.svg';
 
 const navbarStyle = {
-  backgroundColor: 'lightblue', //camelCase notation is important
+  backgroundColor: '#eeeeee',
 };
 
 const Header = ({ title }) => {
   return (
     <Navbar style={navbarStyle} data-bs-theme="light">
       <Container>
-        <Navbar.Brand href="/">{title}</Navbar.Brand>
+        <Logo style={{ maxWidth: '20rem', maxHeight: '4rem' }} />
       </Container>
     </Navbar>
   );
 };
-
-// const Header = ( props ) => {             #this is another way to write the above Header component/properties for title
-//  const { title } = props;
-//  return (
-//      <Navbar bg="light" data-bs-theme="light">
-//        <Navbar.Brand href="/">{title}</Navbar.Brand>
-//     </Navbar>
-//  )
-// };
 
 export default Header;
