@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from 'C:/Users/Chris/Desktop/images-gallery/frontend/src/components/Header.js';
 import Search from 'C:/Users/Chris/Desktop/images-gallery/frontend/src/components/Search.js';
 import ImageCard from 'C:/Users/Chris/Desktop/images-gallery/frontend/src/components/ImageCard';
+import Welcome from 'C:/Users/Chris/Desktop/images-gallery/frontend/src/components/Welcome.js';
 import { Container, Row, Col } from 'react-bootstrap';
 
 const UNSPLASH_KEY = process.env.REACT_APP_UNSPLASH_KEY; // this variable will be used in splash request in unsplash API
@@ -45,13 +46,17 @@ const App = () => {
       <Header title="Images Gallery" />
       <Search word={word} setWord={setWord} handleSubmit={handleSearchSubmit} />
       <Container className="mt-4">
-        <Row xs={1} md={2} lg={3}>
-          {images.map((image, i) => (
-            <Col key={i} className="pb-3">
-              <ImageCard image={image} deleteImage={handleDeleteImage} />
-            </Col>
-          ))}
-        </Row>
+        {images.length ? (
+          <Row xs={1} md={2} lg={3}>
+            {images.map((image, i) => (
+              <Col key={i} className="pb-3">
+                <ImageCard image={image} deleteImage={handleDeleteImage} />
+              </Col>
+            ))}
+          </Row>
+        ) : (
+          <Welcome />
+        )}
       </Container>
     </div>
   );
