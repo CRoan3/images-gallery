@@ -11,14 +11,11 @@ const UNSPLASH_KEY = process.env.REACT_APP_UNSPLASH_KEY; // this variable will b
 // const UNSPLASH_KEY = '....' - WE DO NOT WANT TO PUT OUR KEY IN THE MAIN FILE. Put it in an environment file that will be ignored by git
 
 const App = () => {
-  const [word, setWord] = useState('');
+  const [word, setWord] = useState(''); //word is the variable, and setWord is the function we use to update the word variable
   const [images, setImages] = useState([]); //there are no images when the app starts, so there should be nothing in this array (images array), yet.
-
-  //console.log(images);
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    //console.log(word);
     fetch(
       `https://api.unsplash.com/photos/random/?query=${word}&client_id=${UNSPLASH_KEY}`,
     )
