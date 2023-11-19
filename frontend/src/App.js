@@ -6,7 +6,7 @@ import ImageCard from 'C:/Users/Chris/Desktop/images-gallery/frontend/src/compon
 import Welcome from 'C:/Users/Chris/Desktop/images-gallery/frontend/src/components/Welcome.js';
 import { Container, Row, Col } from 'react-bootstrap';
 
-const UNSPLASH_KEY = process.env.REACT_APP_UNSPLASH_KEY; // this variable will be used in splash request in unsplash API
+const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1:5050';
 
 // const UNSPLASH_KEY = '....' - WE DO NOT WANT TO PUT OUR KEY IN THE MAIN FILE. Put it in an environment file that will be ignored by git
 
@@ -16,9 +16,7 @@ const App = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    fetch(
-      `https://api.unsplash.com/photos/random/?query=${word}&client_id=${UNSPLASH_KEY}`,
-    )
+    fetch(`${API_URL}/new-image?query=${word}`)
       .then((res) => res.json()) //callback function that is executed when promise is resolved. here we call json method to res. res is passed to the callback function as an argument. it will also return the promsie, so we need to resolve it again
       .then((data) => {
         setImages([{ ...data, title: word }, ...images]); //we put data in the beginning of the array because we want to the new data (image) to appear first. this will update array everytime an image is searched
