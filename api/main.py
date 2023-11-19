@@ -7,11 +7,13 @@ from dotenv import load_dotenv
 load_dotenv(dotenv_path="./.env.local")
 
 UNSPLASH_URL = "https://api.unsplash.com/photos/random"
-UNSPLASH_KEY = (os.environ.get("UNSPLASH_KEY", ""))
-DEBUG=bool(os.environ.get("DEBUG", True))
+UNSPLASH_KEY = os.environ.get("UNSPLASH_KEY", "")
+DEBUG = bool(os.environ.get("DEBUG", True))
 
 if not UNSPLASH_KEY:
-   raise EnvironmentError("Please create .env.local file and insert UNSPLASH_KEY there")
+    raise EnvironmentError(
+        "Please create .env.local file and insert UNSPLASH_KEY there"
+    )
 
 app = Flask(__name__)
 CORS(app)
@@ -19,18 +21,23 @@ CORS(app)
 app.config["DEBUG"] = DEBUG
 
 
-@app.route("/new-image") # only GET method will be allowed 
+@app.route("/new-image")  # only GET method will be allowed
 def new_image():
-   word = request.args.get("query")
-   headers = {
-      "Accept-Version": "v1", 
-      "Authorization": "Client-ID " + UNSPLASH_KEY # string concatenation
-   }
-   params = {"query": word}
-   response = requests.get(url=UNSPLASH_URL, headers=headers, params=params)
+    word = request.args.get("query")
+    headers = {
+        "Accept-Version": "v1",
+        "Authorization": "Client-ID " + UNSPLASH_KEY,  # string concatenation
+    }
+    params = {"query": word}
+    response = requests.get(url=UNSPLASH_URL, headers=headers, params=params)
 
-   data = response.json()
-   return data
+    data = response.json()
+    return data
 
-if __name__ == "__main__":        # This makes it to where this app will only run if it is ran directly
-   app.run(host="0.0.0.0", port=5050) # Flask will be running on our computer and will be available via any of the IP addresses assigned to this computer, including localhost IP
+
+if (
+    __name__ == "__main__"
+):  # This makes it to where this app will only run if it is ran directly
+    app.run(
+        host="0.0.0.0", port=5050
+    )  # Flask will be running on our computer and will be available via any of the IP addresses assigned to this computer, including localhost IP
