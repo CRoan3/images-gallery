@@ -26,18 +26,19 @@ def new_image():
     word = request.args.get("query")
     headers = {
         "Accept-Version": "v1",
-        "Authorization": "Client-ID " + UNSPLASH_KEY,  # string concatenation
+        "Authorization": "Client-ID "
+        + UNSPLASH_KEY,  # string concatenation, the space after Client-ID is important
     }
     params = {"query": word}
     response = requests.get(url=UNSPLASH_URL, headers=headers, params=params)
 
-    data = response.json()
+    data = (
+        response.json()
+    )  # server sends JSON object in the response to the client as string (stringified JSON)
     return data
 
 
-if (
-    __name__ == "__main__"
-):  # This makes it to where this app will only run if it is ran directly
+if __name__ == "__main__":
     app.run(
         host="0.0.0.0", port=5050
     )  # Flask will be running on our computer and will be available via any of the IP addresses assigned to this computer, including localhost IP
