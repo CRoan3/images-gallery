@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Header from 'C:/Users/Chris/Desktop/images-gallery/frontend/src/components/Header.js';
-import Search from 'C:/Users/Chris/Desktop/images-gallery/frontend/src/components/Search.js';
-import ImageCard from 'C:/Users/Chris/Desktop/images-gallery/frontend/src/components/ImageCard';
-import Welcome from 'C:/Users/Chris/Desktop/images-gallery/frontend/src/components/Welcome.js';
+import Header from './components/Header.js';
+import Search from './components/Search.js';
+import ImageCard from './components/ImageCard';
+import Welcome from './components/Welcome.js';
 import { Container, Row, Col } from 'react-bootstrap';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1:5050';
