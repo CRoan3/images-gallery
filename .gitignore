@@ -1,1 +1,2 @@
 api/.env.local
+api/__pycache__/mongo_client.cpython-311.pyc

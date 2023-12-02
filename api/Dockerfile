@@ -11,6 +11,7 @@ RUN pip install requests
 RUN pip install flask
 RUN pip install flask_cors
 RUN pip install python-dotenv
+run pip install pymongo
 
 COPY . ./
 
