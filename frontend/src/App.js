@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header.js';
@@ -14,6 +14,21 @@ const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1:5050';
 const App = () => {
   const [word, setWord] = useState(''); //word is the variable, and setWord is the function we use to update the word variable
   const [images, setImages] = useState([]); //there are no images when the app starts, so there should be nothing in this array (images array), yet.
+
+  const getSavedImages = async () => {
+    try {
+      const res = await axios.get(`${API_URL}/images`);
+      setImages(res.data || []);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    (async () => {
+      getSavedImages();
+    })();
+  }, []);
 
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
