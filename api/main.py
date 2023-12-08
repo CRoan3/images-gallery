@@ -1,8 +1,12 @@
 import os
 import requests
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 from dotenv import load_dotenv
+from mongo_client import mongo_client
+
+gallery = mongo_client.gallery
+images_collection = gallery.images
 
 load_dotenv(dotenv_path="./.env.local")
 
@@ -36,6 +40,25 @@ def new_image():
         response.json()
     )  # server sends JSON object in the response to the client as string (stringified JSON)
     return data
+
+
+@app.route("/images", methods=["GET", "POST"])  # only GET and POST will be allowed
+def images():
+    if request.method == "GET":
+        # read images from the database
+        images = images_collection.find(
+            {}
+        )  # empty filter arg will return all images in the gallery instead of a specific key:value pair. _id is necessary in every document, but it will get generated automatically by Pymongo
+        return jsonify(
+            [img for img in images]
+        )  # list gets passed as argument to jsonify function. function will return JSON object that can be safely returned back to client
+    if request.method == "POST":
+        # save image in the database
+        image = request.get_json()
+        image["_id"] = image.get("id")
+        result = images_collection.insert_one(image)
+        inserted_id = result.inserted_id
+        return {"inserted_id": inserted_id}
 
 
 if __name__ == "__main__":
