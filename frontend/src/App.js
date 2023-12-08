@@ -47,6 +47,26 @@ const App = () => {
     //id is the id of each image from unsplash API, can be found in web pageconsole>components>State arrays
     setImages(images.filter((image) => image.id !== id));
   };
+  const handleSaveImage = async (id) => {
+    const imageToBeSaved = images.find((image) => image.id === id);
+    imageToBeSaved.saved = true;
+
+    try {
+      const res = await axios.post(`${API_URL}/images`, imageToBeSaved);
+      if (res.data?.insert_id) {
+        setImages(
+          images.map(
+            (image) =>
+              // eslint-disable-next-line prettier/prettier
+            image.id === id ? { ...image, saved: true } : image
+            // eslint-disable-next-line prettier/prettier
+          )
+        );
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="App">
@@ -57,7 +77,11 @@ const App = () => {
           <Row xs={1} md={2} lg={3}>
             {images.map((image, i) => (
               <Col key={i} className="pb-3">
-                <ImageCard image={image} deleteImage={handleDeleteImage} />
+                <ImageCard
+                  image={image}
+                  deleteImage={handleDeleteImage}
+                  saveImage={handleSaveImage}
+                />
               </Col>
             ))}
           </Row>
